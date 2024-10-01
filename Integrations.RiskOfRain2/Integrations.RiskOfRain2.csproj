@@ -5,6 +5,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>12</LangVersion>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>embedded</DebugType>
+        <Company>OpenShock</Company>
+        <RootNamespace>OpenShock.Integrations.RiskOfRain2</RootNamespace>
+        <AssemblyName>OpenShock.Integrations.RiskOfRain2</AssemblyName>
+        <IsPackable>false</IsPackable>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <FileVersion>1.0.0</FileVersion>
+        <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,6 +22,7 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+      <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
       <PackageReference Include="R2API" Version="5.0.5" />
     </ItemGroup>
 
