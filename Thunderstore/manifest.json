@@ -1,0 +1,10 @@
+{
+	"name": "RiskOfPain",
+	"version_number": "1.0.0",
+	"website_url": "https://github.com/OpenShock/Integrations.RiskOfRain2",
+	"description": "Shocks your OpenShock Shockers in response damage or death",
+	"dependencies": [
+		"tristanmcpherson-R2API-5.0.5",
+		"Rune580-Risk_Of_Options-2.8.2"
+	]
+}
