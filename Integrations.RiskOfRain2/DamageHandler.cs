@@ -35,7 +35,7 @@ public sealed partial class RiskOfPain
             {
                 DamageBehaviour.LowHp => playerCurrentHp / playerMaxHp * 100,
                 DamageBehaviour.DamagePercent => damageMessage.damage / playerMaxHp * 100,
-                _ => throw new NotImplementedException("This is unreachable.")
+                _ => throw new Exception("This is unreachable.")
             };
             intensity = MathUtils.Lerp(0, _settingOnDamageIntensityLimit.Value, Math.Clamp(scaled, 0, 100));
         }
