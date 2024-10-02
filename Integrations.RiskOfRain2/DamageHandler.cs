@@ -7,19 +7,54 @@ namespace OpenShock.Integrations.RiskOfRain2;
 
 public sealed partial class RiskOfPain
 {
+    private Timer _actionTimer = null!;
+    private readonly object _receivedDamageLock = new();
+    private float _receivedDamage = 0;
+
+    private void ActionTimerElapsed(object state)
+    {
+        try
+        {
+            OnDamageActionExecute();
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e);
+        }
+    }
+
+    private void OnDamageActionExecute()
+    {
+        float receivedDamage;
+        lock (_receivedDamageLock)
+        {
+            receivedDamage = _receivedDamage;
+            _receivedDamage = 0;
+        }
+        
+        var intensityByte = CalculateIntensity(receivedDamage);
+        
+        Logger.LogDebug($"ActionTimerElapsed - Damage: {receivedDamage:0.00} Intensity: {intensityByte}");
+        
+        ControlShockersFnf(_settingOnDamageMode.Value, intensityByte, (ushort)_settingOnDamageDuration.Value);
+    }
+
     private void ClientOnDamage(DamageDealtMessage damageMessage)
     {
         if (_localUserCharacterBody == null || damageMessage.victim == null) return;
         if (damageMessage.victim != _localUserCharacterBody.gameObject) return;
         
-        var intensityByte = CalculateIntensity(damageMessage);
-
         Logger.LogDebug($"Player received damage: {damageMessage.damage}");
+        
+        lock (_receivedDamageLock)
+        {
+            _receivedDamage += damageMessage.damage;            
+        }
 
-        ControlShockersFnf(_settingOnDamageMode.Value, intensityByte, (ushort)_settingOnDamageDuration.Value);
+        _actionTimer.Change(TimeSpan.FromMilliseconds(50), Timeout.InfiniteTimeSpan);
     }
 
-    private byte CalculateIntensity(DamageDealtMessage damageMessage)
+    private byte CalculateIntensity(float damage)
     {
 #pragma warning disable CS8602 // This is fine, we checked this before
         var playerMaxHp = _localUserCharacterBody.healthComponent.fullCombinedHealth;
@@ -33,15 +68,15 @@ public sealed partial class RiskOfPain
         {
             var scaled = onDamageBehaviour switch
             {
-                DamageBehaviour.LowHp => playerCurrentHp / playerMaxHp * 100,
-                DamageBehaviour.DamagePercent => damageMessage.damage / playerMaxHp * 100,
+                DamageBehaviour.LowHp => playerCurrentHp / playerMaxHp,
+                DamageBehaviour.DamagePercent => damage / playerMaxHp,
                 _ => throw new Exception("This is unreachable.")
             };
-            intensity = MathUtils.Lerp(0, _settingOnDamageIntensityLimit.Value, Math.Clamp(scaled, 0, 100));
+            intensity = MathUtils.Lerp(0, _settingOnDamageIntensityLimit.Value, MathUtils.Saturate(scaled));
         }
         else // Only other option is DamageAbsolute
         {
-            intensity = Math.Clamp(damageMessage.damage, 0, _settingOnDamageIntensityLimit.Value);
+            intensity = Math.Clamp(damage, 0, _settingOnDamageIntensityLimit.Value);
         }
         
         var intensityByte = Convert.ToByte(intensity);

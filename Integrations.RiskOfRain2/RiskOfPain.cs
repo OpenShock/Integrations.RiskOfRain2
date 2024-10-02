@@ -13,13 +13,15 @@ public sealed partial class RiskOfPain : BaseUnityPlugin
 {
     public static RiskOfPain Instance { get; private set; } = null!; // Singleton
     public static ManualLogSource ModLogger { get; private set; } = null!; // Mod Logger for e.g. LucTask
-
+    
     private void Awake()
     {
         Logger.LogDebug("RiskOfPain loading...");
 
         Instance = this;
         ModLogger = Logger;
+
+        _actionTimer = new Timer(ActionTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
         
         SetupConfiguration();
         RegisterConfigEvents();
