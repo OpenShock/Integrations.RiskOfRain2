@@ -1,6 +1,21 @@
-# RiskOfPain (Integrations.RiskOfRain2)
+<center><div align="center">
+
+<img alt="OpenShock Logo" height="150px" width="150px" src="https://openshock.org/IconSlowSpin.svg" />
+
+<h1><b>RiskOfPain (Integrations.RiskOfRain2)</b></h1>
+
+[![Release Version](https://img.shields.io/github/v/release/OpenShock/Integrations.RiskOfRain2?style=for-the-badge&color=e14a6d)](https://github.com/OpenShock/Integrations.RiskOfRain2/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/OpenShock/Integrations.RiskOfRain2/total?style=for-the-badge&color=e14a6d)](https://github.com/OpenShock/Integrations.RiskOfRain2/releases/latest)
+[![Discord](https://img.shields.io/discord/1078124408775901204?style=for-the-badge&color=e14a6d&label=OpenShock%20Discord&logo=discord)](https://openshock.net/discord)
+
+[![Thunderstore Version](https://img.shields.io/thunderstore/v/OpenShock/RiskOfPain?style=for-the-badge&color=e14a6d&logo=thunderstore)](https://thunderstore.io/package/OpenShock/RiskOfPain/)
+[![Thunderstore Downloads](https://img.shields.io/thunderstore/dt/OpenShock/RiskOfPain?style=for-the-badge&color=e14a6d&label=Downloads&logo=thunderstore)](https://thunderstore.io/package/OpenShock/RiskOfPain/)
+
+<br>
 
 Allows controlling your OpenShock Shockers in response to damage or death.
+
+</div></center>
 
 ## Configuration
 
