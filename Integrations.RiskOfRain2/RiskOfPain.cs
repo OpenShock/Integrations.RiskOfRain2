@@ -40,6 +40,7 @@ public sealed partial class RiskOfPain : BaseUnityPlugin
         CharacterBody.onBodyStartGlobal += OnCharacterBodyStart;
         CharacterBody.onBodyDestroyGlobal += OnCharacterBodyDestroy;
         GlobalEventManager.onClientDamageNotified += ClientOnDamage;
+        GlobalEventManager.onCharacterDeathGlobal += OnCharacterDeath;
         Logger.LogDebug("Events registered");
     }
 
@@ -49,6 +50,7 @@ public sealed partial class RiskOfPain : BaseUnityPlugin
         CharacterBody.onBodyStartGlobal -= OnCharacterBodyStart;
         CharacterBody.onBodyDestroyGlobal -= OnCharacterBodyDestroy;
         GlobalEventManager.onClientDamageNotified -= ClientOnDamage;
+        GlobalEventManager.onCharacterDeathGlobal -= OnCharacterDeath;
         Logger.LogDebug("Events unregistered");
     }
     

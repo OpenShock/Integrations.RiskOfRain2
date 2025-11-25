@@ -14,8 +14,10 @@ public sealed partial class RiskOfPain
     // Settings
 
     // OnDeath
-    private ConfigEntry<byte> _settingOnDeathIntensity = null!;
-    private ConfigEntry<ushort> _settingOnDeathDuration = null!;
+    private ConfigEntry<bool> _settingOnDeathEnabled = null!;
+    private ConfigEntry<ControlType> _settingOnDeathBehaviour = null!;
+    private ConfigEntry<int> _settingOnDeathIntensity = null!;
+    private ConfigEntry<int> _settingOnDeathDuration = null!;
 
     // OnDamage
     private ConfigEntry<bool> _settingOnDamageEnabled = null!;
@@ -24,9 +26,16 @@ public sealed partial class RiskOfPain
 
     private ConfigEntry<int> _settingOnDamageDuration = null!;
     private ConfigEntry<int> _settingOnDamageIntensityLimit = null!;
+
+    // Debug
+    private ConfigEntry<bool> _settingEnableVerboseLogging = null!;
     
     private void SetupConfiguration()
     {
+        // Debug
+        _settingEnableVerboseLogging = Config.Bind<bool>("OpenShock", "EnableVerboseLogging", false,
+            "Enables verbose logging for debugging purposes");
+
         // OpenShock Server
         _openShockServer = Config.Bind<string>("OpenShock", "Server", "https://api.openshock.app",
             "The URL of the OpenShock backend");
@@ -39,20 +48,22 @@ public sealed partial class RiskOfPain
         // Settings
 
         // OnDeath
-        _settingOnDeathIntensity = Config.Bind<byte>("OnDeath", "Intensity", 25,
+        _settingOnDeathEnabled = Config.Bind<bool>("OnDeath", "Enabled", true, "Enables on death");
+        _settingOnDeathBehaviour = Config.Bind<ControlType>("OnDeath", "Behaviour", ControlType.Shock,
+            "The action that happens when the player dies");
+        _settingOnDeathIntensity = Config.Bind<int>("OnDeath", "Intensity", 25,
             "The intensity of the shocker when the player dies");
-        _settingOnDeathDuration = Config.Bind<ushort>("OnDeath", "Duration", 1000,
+        _settingOnDeathDuration = Config.Bind<int>("OnDeath", "Duration", 1000,
             "The duration of the shocker when the player dies");
 
         // OnDamage
-
         _settingOnDamageEnabled = Config.Bind<bool>("OnDamage", "Enabled", true, "Enables on damage");
         _settingOnDamageMode = Config.Bind<ControlType>("OnDamage", "Mode", ControlType.Shock,
             "The action that happens when you take damage");
         _settingOnDamageBehaviour = Config.Bind<DamageBehaviour>("OnDamage", "Behaviour", DamageBehaviour.LowHp, 
             "How the intensity is calculated. LowHp = Higher intensity the lower on HP you are; DamagePercentage = Intensity correlates to how much health you have lost of your max HP when damaged. DamageAbsolute = Intensity is equal to how much damage you recevied");
 
-        _settingOnDamageDuration = Config.Bind<int>("OnDamage", "Duration", 100,
+        _settingOnDamageDuration = Config.Bind<int>("OnDamage", "Duration", 300,
             "The duration of the shocker when the player takes damage");
         _settingOnDamageIntensityLimit = Config.Bind<int>("OnDamage", "IntensityLimit", 25,
             "Intensity limit for the shocker when the player takes damage");

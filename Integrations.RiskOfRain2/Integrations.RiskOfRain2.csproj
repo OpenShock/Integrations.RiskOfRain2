@@ -11,8 +11,8 @@
         <RootNamespace>OpenShock.Integrations.RiskOfRain2</RootNamespace>
         <AssemblyName>OpenShock.Integrations.RiskOfRain2</AssemblyName>
         <IsPackable>false</IsPackable>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <AssemblyVersion>1.1.0</AssemblyVersion>
+        <FileVersion>1.1.0</FileVersion>
         <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     </PropertyGroup>
 
@@ -24,12 +24,6 @@
       <PackageReference Include="BepInEx.Core" Version="5.4.21" />
       <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
       <PackageReference Include="R2API" Version="5.0.5" />
+      <PackageReference Include="Rune580.Mods.RiskOfRain2.RiskOfOptions" Version="2.8.3" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="RiskOfOptions">
-        <HintPath>C:\Users\Lucpe\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\modding\BepInEx\plugins\Rune580-Risk_Of_Options\RiskOfOptions\RiskOfOptions.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>

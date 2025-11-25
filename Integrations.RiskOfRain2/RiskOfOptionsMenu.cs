@@ -18,6 +18,8 @@ public sealed partial class RiskOfPain
         {
             submitOn = InputFieldConfig.SubmitEnum.OnExitOrSubmit
         }));
+        // Debug
+        ModSettingsManager.AddOption(new CheckBoxOption(_settingEnableVerboseLogging));
 
         ModSettingsManager.AddOption(
             new GenericButtonOption(
@@ -31,6 +33,22 @@ public sealed partial class RiskOfPain
                 }
             ));
 
+
+        // OnDeath
+        ModSettingsManager.AddOption(new CheckBoxOption(_settingOnDeathEnabled));
+        ModSettingsManager.AddOption(new ChoiceOption(_settingOnDeathBehaviour));
+        ModSettingsManager.AddOption(new IntSliderOption(_settingOnDeathIntensity, new IntSliderConfig
+        {
+            min = 1,
+            max = 100
+        }));
+        ModSettingsManager.AddOption(new IntSliderOption(_settingOnDeathDuration, new IntSliderConfig
+        {
+            min = 300,
+            max = 30_000
+        }));
+
+        // OnDamage
         ModSettingsManager.AddOption(new CheckBoxOption(_settingOnDamageEnabled));
         ModSettingsManager.AddOption(new ChoiceOption(_settingOnDamageMode));
         ModSettingsManager.AddOption(new ChoiceOption(_settingOnDamageBehaviour));
