@@ -49,7 +49,8 @@ public sealed partial class RiskOfPain
             return;
         }
 
-        Logger.LogDebug("Sending control request");
+        if (_settingEnableVerboseLogging.Value)
+            Logger.LogDebug($"Sending control request - Type: {controlType} Intensity: {intensity} Duration: {duration}ms");
         
         var controls = _shockersList.Select(shocker =>
             new Control
@@ -62,7 +63,8 @@ public sealed partial class RiskOfPain
 
         await _openShockApiClient.Control(controls);
 
-        Logger.LogDebug("Command sent");
+        if (_settingEnableVerboseLogging.Value)
+            Logger.LogDebug("Command sent");
     }
     
     private void ControlShockersFnf(ControlType controlType, byte intensity, ushort duration) =>
