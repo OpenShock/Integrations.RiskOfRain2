@@ -24,6 +24,6 @@
       <PackageReference Include="BepInEx.Core" Version="5.4.21" />
       <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
       <PackageReference Include="R2API" Version="5.0.5" />
-      <PackageReference Include="Rune580.Mods.RiskOfRain2.RiskOfOptions" Version="2.8.3" />
+      <PackageReference Include="Rune580.Mods.RiskOfRain2.RiskOfOptions" Version="2.8.6" />
     </ItemGroup>
 </Project>
